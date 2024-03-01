@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "name": "Ranssi Poppi Poster",
+    "version": "1.0",
+    "description": "Post YouTube links with titles to Ranssi.",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "cookies",
+        "*://www.youtube.com/*",
+        "*://ranssi.paivola.fi/*"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://www.youtube.com/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "48": "icon.png"
+        }
+    },
+    "icons": {
+        "48": "icon.png",
+        "96": "icon.png"
+    }
+}
