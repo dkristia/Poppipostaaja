@@ -1,4 +1,4 @@
-function requestPost(includeCreator, customTitle) {
+function requestPost(includeCreator, customTitle, postId) {
     const videoTitle = customTitle || document.querySelector('ytd-watch-metadata #title yt-formatted-string').textContent.trim();
     const videoUrl = window.location.href.split("&")[0] || window.location.href;
     let formattedTitle = videoTitle;
@@ -15,7 +15,8 @@ function requestPost(includeCreator, customTitle) {
     chrome.runtime.sendMessage({
         action: "getPostDetails",
         videoTitle: formattedTitle,
-        videoUrl: videoUrl
+        videoUrl: videoUrl,
+        postId: postId
     });
 }
 
@@ -25,6 +26,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
     if (request.action === "requestPost") {
-        requestPost(request.includeCreator, request.customTitle);
+        requestPost(request.includeCreator, request.customTitle, request.postId);
     }
 });

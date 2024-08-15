@@ -10,7 +10,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "getPostDetails") {
         getCookie('__Secure-next-auth.session-token').then(cookie => {
             if (cookie) {
-                return postYouTubeLinkToForum(request.videoTitle, request.videoUrl, cookie.value);
+                postYouTubeLinkToForum(request.videoTitle, request.videoUrl, cookie.value, request.postId);
             } else {
                 console.error('No token found');
             }
@@ -21,10 +21,11 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
 });
 
-function postYouTubeLinkToForum(videoTitle, videoUrl, token) {
+function postYouTubeLinkToForum(videoTitle, videoUrl, token, postId) {
     const formattedMessage = `[${videoTitle}](${videoUrl})`;
+    console.log(postId);
 
-    fetch("https://ranssi.paivola.fi/api/v3/post/9057/comment/add", {
+    fetch(`https://ranssi.paivola.fi/api/v3/post/${postId}/comment/add`, {
         method: "POST",
         headers: {
             "accept": "*/*",
@@ -38,7 +39,12 @@ function postYouTubeLinkToForum(videoTitle, videoUrl, token) {
         }),
         credentials: "include"
     })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Server responded with status ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Success:', data);
         })
