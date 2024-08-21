@@ -1,7 +1,8 @@
 {
     "manifest_version": 3,
     "name": "Ranssi Poppi Poster",
-    "version": "1.1",
+    "version": "1.2",
+    "description": "Post YouTube links with titles to Ranssi.",
     "permissions": [
         "activeTab",
         "scripting",

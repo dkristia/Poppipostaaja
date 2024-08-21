@@ -23,7 +23,6 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 function postYouTubeLinkToForum(videoTitle, videoUrl, token, postId) {
     const formattedMessage = `[${videoTitle}](${videoUrl})`;
-    console.log(postId);
 
     fetch(`https://ranssi.paivola.fi/api/v3/post/${postId}/comment/add`, {
         method: "POST",

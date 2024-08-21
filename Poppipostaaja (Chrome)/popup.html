@@ -1,7 +1,8 @@
 <!doctype html>
-<html>
+<html lang="fi">
 
 <head>
+    <meta charset="utf-8">
     <title>Ranssi Poppipostaaja</title>
     <style>
         body {
@@ -23,6 +24,10 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 4px;
+        }
+
+        .animated-button:disabled {
+            background-color: gray;
         }
 
         .animated-button:active {
@@ -53,7 +58,7 @@
         <input type="checkbox" id="includeCreatorCheckbox" checked> Include Creator Name
     </label>
     <input type="text" id="customTitle" placeholder="Vaihda title (optional)">
-    <button id="postButton" class="animated-button">Postaa poppeihin</button>
+    <button id="postButton" class="animated-button" disabled="true">Venaa hetki...</button>
     <script src="popup.js"></script>
 </body>
 
